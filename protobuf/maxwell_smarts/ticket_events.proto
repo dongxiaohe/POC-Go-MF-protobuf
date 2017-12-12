@@ -2,6 +2,13 @@ syntax = "proto3";
 
 import "zendesk/protobuf.proto";
 
+/**
+Should follow these 2 documents to design the ticket data.
+
+https://developer.zendesk.com/rest_api/docs/core/tickets
+https://github.com/zendesk/zendesk/blob/master/app/presenters/api/v2/tickets/ticket_presenter.rb
+*/
+
 package com.zendesk.maxwellsmarts.zendesk.ticketevents;
 option java_multiple_files = true;
 
@@ -15,7 +22,6 @@ enum TicketStatus {
     CLOSED = 6;
     DELETED = 7;
     ARCHIVED = 8;
-
 }
 
 message Comment {
@@ -27,21 +33,12 @@ message TicketCreation {
     int64 requester_id = 1;
     TicketStatus status = 2;
     Comment comment = 3;
-    Assignment assignment = 4;
-    string commentPart1 = 5;
-    string commentPart2 = 6;
-
-    reserved "Comment";
-}
-
-message Assignment {
-    int64 user_id = 1;
-    int64 group_id = 2;
-}
-
-message AssignmentChange {
-    Assignment previous = 1;
-    Assignment current = 2;
+    int64 assignee_id = 4;
+    int64 group_id = 5;
+    string description = 6;
+    string raw_subject = 7;
+    repeated string tags = 8;
+    int64 nice_id = 9;
 }
 
 message StatusChange {
@@ -63,15 +60,15 @@ message TicketEvent {
         TicketCreation ticket_creation = 2;
         Comment comment_creation = 3;
         StatusChange status_change = 4;
-        AssignmentChange assignment_change = 5;
     }
 }
 
 message TicketEvents {
-    com.zendesk.protobuf.ProtobufHeader header = 1;
-    reserved 2 to 4;
     int32 account_id = 5;
     int64 actor_id = 6;
     int64 ticket_id = 7;
     repeated TicketEvent events = 8;
+
+    com.zendesk.protobuf.ProtobufHeader header = 2040;
+    reserved 2041 to 2047;
 }

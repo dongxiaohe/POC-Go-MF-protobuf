@@ -60,8 +60,7 @@ func main() {
 				//if err != nil {
 				//	log.Fatal("unmarshaling error: ", err)
 				//}
-				fmt.Println("account ID: ", ticketEvents.AccountId)
-				fmt.Println("ticket ID", ticketEvents.TicketId)
+				fmt.Println("ticket event: ", ticketEvents)
 
 			case kafka.PartitionEOF:
 				fmt.Printf("%% Reached %v\n", e)

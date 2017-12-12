@@ -15,5 +15,5 @@ message ProtobufHeader {
 
 // Supertype of all zendesk toplevel protobuf messages
 message TypedEvent {
-  ProtobufHeader header = 1;
+  ProtobufHeader header = 2040;
 }

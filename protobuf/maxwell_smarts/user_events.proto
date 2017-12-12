@@ -37,10 +37,11 @@ message UserEvent {
 }
 
 message UserEvents {
-    com.zendesk.protobuf.ProtobufHeader header = 1;
-    reserved 2 to 4;
     int32 account_id = 5;
     int64 actor_id = 6;
     int64 user_id = 7;
     repeated UserEvent events = 8;
+
+    com.zendesk.protobuf.ProtobufHeader header = 2040;
+    reserved 2041 to 2047;
 }
